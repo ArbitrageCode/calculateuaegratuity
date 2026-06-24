@@ -5,23 +5,43 @@ interface Props {
   title: string;
   description: string;
   canonical?: string;
+  ogImage?: string;
 }
 
 const {
   title,
   description,
   canonical = 'https://uaegratuitycalculator.com',
+  ogImage = 'https://uaegratuitycalculator.com/web-app-manifest-512x512.png',
 } = Astro.props;
 
 const siteSchema = JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'WebApplication',
+  '@type': 'SoftwareApplication',
   name: 'UAE Gratuity Calculator',
+  alternateName: ['Gratuity Calculator UAE', 'MOHRE Gratuity Calculator', 'End of Service Calculator UAE'],
   url: 'https://uaegratuitycalculator.com',
-  description: 'Free UAE end-of-service gratuity calculator following Federal Decree-Law No. 33 of 2021, Article 51.',
+  description: 'Free UAE end-of-service gratuity calculator based on Federal Decree-Law No. 33 of 2021, Article 51. Covers limited contracts, legacy unlimited contracts, the 21-day and 30-day tiers, and the 2-year cap.',
   applicationCategory: 'FinanceApplication',
+  applicationSubCategory: 'Calculator',
   operatingSystem: 'Any',
+  browserRequirements: 'Requires JavaScript',
+  inLanguage: ['en', 'ar', 'hi', 'ur'],
+  keywords: 'uae gratuity calculator, gratuity calculator dubai, end of service calculator uae, mohre gratuity calculator, gratuity calculator abu dhabi, how to calculate gratuity in uae, uae labour law gratuity',
+  featureList: [
+    'Calculates gratuity under UAE Federal Decree-Law No. 33 of 2021, Article 51',
+    'Supports limited contracts (post-2022) and legacy unlimited contracts',
+    'Shows 21-day and 30-day tier breakdown',
+    'Applies the 2-year salary cap automatically',
+    'Handles unpaid leave day deductions',
+    'Resignation vs termination scaling for unlimited contracts',
+  ],
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'AED' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'UAE Gratuity Calculator',
+    url: 'https://uaegratuitycalculator.com',
+  },
 });
 ---
 
@@ -44,6 +64,15 @@ const siteSchema = JSON.stringify({
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:site_name" content="UAE Gratuity Calculator" />
+    <meta property="og:locale" content="en_AE" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#ffffff" />
 
