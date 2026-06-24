@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="404 — Page Not Found | UAE Gratuity Calculator"
+  description="This page doesn't exist. Return to the UAE Gratuity Calculator."
+  canonical="https://uaegratuitycalculator.com/404"
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="bg-canvas py-24 sm:py-36">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-4">404</p>
+      <h1 class="text-[32px] sm:text-[40px] font-semibold leading-[1.1] tracking-[-1.5px] text-ink mb-6">
+        Page not found.
+      </h1>
+      <p class="text-[18px] text-body leading-[1.6] mb-10 max-w-xl mx-auto">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 px-5 py-2.5 bg-ink text-on-primary text-sm font-medium rounded-full hover:opacity-80 transition-opacity"
+      >
+        Go to Calculator →
+      </a>
+    </div>
+  </section>
+</Layout>
