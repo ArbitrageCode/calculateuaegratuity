@@ -132,6 +132,8 @@ const siteSchema = JSON.stringify({
           <a href="/#calculator" class="px-3 py-1.5 text-sm text-body hover:text-ink rounded-full hover:bg-canvas-soft transition-colors">Calculator</a>
           <a href="/how-it-works" class="px-3 py-1.5 text-sm text-body hover:text-ink rounded-full hover:bg-canvas-soft transition-colors">How It Works</a>
           <a href="/faq" class="px-3 py-1.5 text-sm text-body hover:text-ink rounded-full hover:bg-canvas-soft transition-colors">FAQ</a>
+          <a href="/about" class="px-3 py-1.5 text-sm text-body hover:text-ink rounded-full hover:bg-canvas-soft transition-colors">About</a>
+          <a href="/contact" class="px-3 py-1.5 text-sm text-body hover:text-ink rounded-full hover:bg-canvas-soft transition-colors">Contact</a>
           <!-- Dark mode toggle -->
           <button
             id="theme-toggle"
@@ -183,7 +185,7 @@ const siteSchema = JSON.stringify({
             </p>
           </div>
 
-          <div class="grid grid-cols-2 gap-x-8 sm:gap-x-16 gap-y-2 text-sm">
+          <div class="grid grid-cols-3 gap-x-8 sm:gap-x-12 gap-y-2 text-sm">
             <div>
               <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-3">Tools</p>
               <ul class="space-y-2">
@@ -193,11 +195,18 @@ const siteSchema = JSON.stringify({
               </ul>
             </div>
             <div>
+              <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-3">Company</p>
+              <ul class="space-y-2">
+                <li><a href="/about" class="text-body hover:text-ink transition-colors">About Us</a></li>
+                <li><a href="/contact" class="text-body hover:text-ink transition-colors">Contact</a></li>
+              </ul>
+            </div>
+            <div>
               <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-3">Legal</p>
               <ul class="space-y-2">
+                <li><a href="/privacy-policy" class="text-body hover:text-ink transition-colors">Privacy Policy</a></li>
+                <li><a href="/terms" class="text-body hover:text-ink transition-colors">Terms &amp; Conditions</a></li>
                 <li><a href="/how-it-works#disclaimer" class="text-body hover:text-ink transition-colors">Disclaimer</a></li>
-                <li><a href="/how-it-works#article-51" class="text-body hover:text-ink transition-colors">Article&nbsp;51</a></li>
-                <li><a href="/how-it-works#formula" class="text-body hover:text-ink transition-colors">The Formula</a></li>
               </ul>
             </div>
           </div>

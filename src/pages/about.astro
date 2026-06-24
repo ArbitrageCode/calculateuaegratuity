@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'About UAE Gratuity Calculator — Free End-of-Service Calculator';
+const description =
+  'Learn about UAE Gratuity Calculator: a free, transparent tool built to help UAE employees calculate their end-of-service benefits accurately, based on Federal Decree-Law No. 33 of 2021.';
+---
+
+<Layout title={title} description={description} canonical="https://uaegratuitycalculator.com/about">
+  <section class="bg-canvas py-12 sm:py-24">
+    <div class="max-w-3xl mx-auto px-6">
+      <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-4">ABOUT US</p>
+      <h1 class="text-[32px] sm:text-[40px] font-semibold leading-[1.1] tracking-[-1.5px] text-ink mb-6">
+        Built to give workers accurate numbers.
+      </h1>
+      <p class="text-[18px] text-body leading-[1.6] mb-12 max-w-2xl">
+        UAE Gratuity Calculator is a free, independent tool that helps private-sector workers in the UAE calculate their end-of-service benefits quickly and transparently.
+      </p>
+
+      <div class="space-y-10 text-[16px] text-body leading-[1.75]">
+        <div>
+          <h2 class="text-[22px] font-semibold text-ink mb-3 tracking-[-0.4px]">Why this tool exists</h2>
+          <p>
+            When employees leave a job in the UAE, their gratuity calculation is often a black box. Employers issue a final settlement number, but workers have no easy way to independently verify it. Mistakes — whether accidental or deliberate — are common: wrong salary base, incorrect service period, wrong contract type, missed unpaid leave adjustments.
+          </p>
+          <p class="mt-3">
+            This calculator was built to change that. It walks through every step of the Article 51 formula transparently — daily wage, tier 1 (21 days/year), tier 2 (30 days/year), scaling for unlimited contracts, and the 2-year cap — so you can see exactly how your number was reached.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-[22px] font-semibold text-ink mb-3 tracking-[-0.4px]">What we cover</h2>
+          <ul class="space-y-2 pl-5 list-disc marker:text-mute">
+            <li>Limited contracts under Federal Decree-Law No. 33 of 2021 (post-2022 new hires)</li>
+            <li>Legacy unlimited contracts (pre-2022, with resignation sliding scale)</li>
+            <li>The 21-day and 30-day tier breakdown, year by year</li>
+            <li>Automatic application of the 2-year salary cap</li>
+            <li>Unpaid leave day deductions per Article 51</li>
+            <li>Resignation vs. termination rules for unlimited contracts</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-[22px] font-semibold text-ink mb-3 tracking-[-0.4px]">Who this is for</h2>
+          <p>
+            Any private-sector employee in the UAE who is leaving their job, reviewing a settlement offer, or simply wants to understand what they are entitled to. The tool is relevant across all emirates — Dubai, Abu Dhabi, Sharjah, Ajman, Ras Al Khaimah, Fujairah, and Umm Al Quwain — as the federal labour law applies nationwide for most private-sector work.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-[22px] font-semibold text-ink mb-3 tracking-[-0.4px]">Accuracy and limitations</h2>
+          <p>
+            All calculations run locally in your browser using the Article 51 formula. No data is sent to any server. The tool applies the standard statutory formula and is designed to match what MOHRE would use for a straightforward case.
+          </p>
+          <p class="mt-3">
+            However, this is not legal advice. Real-world cases sometimes involve non-standard contract terms, disputed service periods, or specific free-zone regulations (DIFC, ADGM) that deviate from the federal framework. If your settlement is being disputed, consult a UAE-qualified employment lawyer or file a complaint with MOHRE (800-60).
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-[22px] font-semibold text-ink mb-3 tracking-[-0.4px]">Privacy</h2>
+          <p>
+            The calculator runs entirely client-side. We do not collect, store, or transmit your salary, dates, or any personal information. The page uses Google Translate for optional language support — see our <a href="/privacy-policy" class="text-link hover:underline">Privacy Policy</a> for full details.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-[22px] font-semibold text-ink mb-3 tracking-[-0.4px]">Get in touch</h2>
+          <p>
+            Have a question, spotted an error, or want to suggest an improvement? We are happy to hear from you. Visit our <a href="/contact" class="text-link hover:underline">contact page</a> to reach out.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-hairline">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-sm font-medium text-ink hover:opacity-70 transition-opacity"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+          </svg>
+          Back to calculator
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
