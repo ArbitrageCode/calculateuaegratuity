@@ -1,0 +1,331 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'How UAE Gratuity Is Calculated, Article 51 Formula Explained';
+const description =
+  'A complete guide to UAE end-of-service gratuity: the Article 51 formula, new vs. old law, daily wage, 2-year cap, partial years, and worked examples with real numbers.';
+
+const articleSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How UAE End-of-Service Gratuity Is Calculated',
+  description,
+  author: { '@type': 'Organization', name: 'UAE Gratuity Calculator' },
+  publisher: { '@type': 'Organization', name: 'UAE Gratuity Calculator' },
+  datePublished: '2024-01-01',
+  dateModified: '2024-01-01',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://uaegratuitycalculator.com/how-it-works' },
+});
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://uaegratuitycalculator.com/how-it-works"
+>
+  <slot name="head" slot="head">
+    <script type="application/ld+json" set:html={articleSchema} />
+  </slot>
+
+  <!-- Hero -->
+  <section class="bg-canvas border-b border-hairline py-10 sm:py-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <a href="/" class="inline-flex items-center gap-1.5 text-sm text-mute hover:text-ink transition-colors mb-8">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to calculator
+      </a>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-canvas-soft border border-hairline text-[12px] font-mono text-mute mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan" aria-hidden="true"></span>
+        FEDERAL DECREE-LAW NO. 33 OF 2021
+      </div>
+
+      <h1 class="text-[28px] sm:text-[36px] md:text-[42px] font-semibold leading-[1.1] tracking-[-1.2px] sm:tracking-[-1.8px] text-ink mb-5">
+        How UAE end-of-service gratuity is calculated.
+      </h1>
+      <p class="text-[16px] sm:text-[18px] text-body leading-[1.6]">
+        A plain-language breakdown of the Article 51 formula, the daily wage, service tiers, contract rules, and the 2-year cap, with worked examples you can check against our calculator.
+      </p>
+    </div>
+  </section>
+
+  <!-- Article body -->
+  <section class="bg-canvas-soft py-10 sm:py-16">
+    <div class="max-w-3xl mx-auto px-6">
+
+      <!-- Table of contents -->
+      <nav class="mb-12 p-5 rounded-[8px] bg-canvas border border-hairline" aria-label="Table of contents">
+        <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-3">On this page</p>
+        <ol class="space-y-1.5 text-sm">
+          <li><a href="#overview" class="text-link hover:underline">1. Overview</a></li>
+          <li><a href="#daily-wage" class="text-link hover:underline">2. Step 1, Calculate the daily wage</a></li>
+          <li><a href="#service-period" class="text-link hover:underline">3. Step 2, Determine the service period</a></li>
+          <li><a href="#formula" class="text-link hover:underline">4. Step 3, Apply the gratuity formula</a></li>
+          <li><a href="#new-vs-old" class="text-link hover:underline">5. New law vs. legacy unlimited contract</a></li>
+          <li><a href="#cap" class="text-link hover:underline">6. The 2-year cap</a></li>
+          <li><a href="#examples" class="text-link hover:underline">7. Worked examples</a></li>
+          <li><a href="#article-51" class="text-link hover:underline">8. Article 51, full text reference</a></li>
+          <li><a href="#disclaimer" class="text-link hover:underline">9. Disclaimer</a></li>
+        </ol>
+      </nav>
+
+      <!-- 1. Overview -->
+      <div id="overview" class="mb-12 scroll-mt-20">
+        <h2 class="text-[24px] font-semibold tracking-[-0.96px] text-ink mb-4">1. Overview</h2>
+        <p class="text-base text-body leading-relaxed mb-4">
+          End-of-service gratuity (also called <em>end-of-service benefit</em> or <em>EOSB</em>) is a lump-sum payment every employee in the UAE private sector is entitled to receive when they leave a job after completing at least one year of continuous service.
+        </p>
+        <p class="text-base text-body leading-relaxed mb-4">
+          The entitlement is governed by <strong class="text-ink">UAE Federal Decree-Law No. 33 of 2021</strong> (the New Labour Law), specifically <strong class="text-ink">Article 51</strong>, which came into effect on 2 February 2022. Prior to this, the 1980 Labour Law (Federal Law No. 8 of 1980) applied.
+        </p>
+        <p class="text-base text-body leading-relaxed">
+          The formula has three inputs: your <strong class="text-ink">basic salary</strong>, your <strong class="text-ink">length of service</strong>, and your <strong class="text-ink">contract type</strong>. Allowances (housing, transport, etc.) are explicitly excluded.
+        </p>
+      </div>
+
+      <!-- 2. Daily wage -->
+      <div id="daily-wage" class="mb-12 scroll-mt-20">
+        <h2 class="text-[24px] font-semibold tracking-[-0.96px] text-ink mb-4">2. Step 1, Calculate the daily wage</h2>
+        <p class="text-base text-body leading-relaxed mb-4">
+          The daily wage is the foundation of the calculation. Article 51 defines it as:
+        </p>
+        <div class="rounded-[8px] bg-ink p-5 mb-4 font-mono text-sm text-on-primary overflow-x-auto">
+          <p class="text-mute text-[11px] uppercase tracking-widest mb-2">Formula</p>
+          <p>Daily wage = Monthly basic salary ÷ 30</p>
+        </div>
+        <p class="text-base text-body leading-relaxed mb-4">
+          The divisor is always <strong class="text-ink">30</strong>, regardless of the actual number of days in the month. This is a legal convention, not a calendar calculation.
+        </p>
+        <div class="rounded-[8px] bg-canvas border border-hairline p-5 mb-4">
+          <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-2">Example</p>
+          <p class="text-sm text-body">Monthly basic salary: <strong class="text-ink">AED 8,000</strong></p>
+          <p class="text-sm text-body mt-1">Daily wage: AED 8,000 ÷ 30 = <strong class="text-ink font-mono">AED 266.67</strong></p>
+        </div>
+        <div class="rounded-[8px] bg-error-soft border border-error/20 p-4">
+          <p class="text-sm font-medium text-error-deep mb-1">Important</p>
+          <p class="text-sm text-error-deep/80">Only the <strong>basic salary</strong> is used. Housing allowance, transport allowance, food allowance, commissions, bonuses, overtime, and all other allowances are excluded from the gratuity calculation.</p>
+        </div>
+      </div>
+
+      <!-- 3. Service period -->
+      <div id="service-period" class="mb-12 scroll-mt-20">
+        <h2 class="text-[24px] font-semibold tracking-[-0.96px] text-ink mb-4">3. Step 2, Determine the service period</h2>
+        <p class="text-base text-body leading-relaxed mb-4">
+          Service is measured from your first day of employment to your last working day. Days on <strong class="text-ink">unpaid leave</strong> are excluded, they do not count toward the gratuity-eligible service period.
+        </p>
+        <p class="text-base text-body leading-relaxed mb-4">
+          The threshold rules are:
+        </p>
+        <ul class="space-y-3 mb-4">
+          <li class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-canvas border border-hairline flex items-center justify-center shrink-0 mt-0.5 text-[11px] font-mono text-mute">✗</span>
+            <span class="text-sm text-body"><strong class="text-ink">Less than 1 year</strong>, no gratuity entitlement. The first 12 months must be completed in full.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-canvas border border-hairline flex items-center justify-center shrink-0 mt-0.5 text-[11px] font-mono text-mute">✓</span>
+            <span class="text-sm text-body"><strong class="text-ink">1 to 5 years</strong>, gratuity accrues at 21 days of basic salary per year, pro-rated for partial years.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-5 h-5 rounded-full bg-canvas border border-hairline flex items-center justify-center shrink-0 mt-0.5 text-[11px] font-mono text-mute">✓</span>
+            <span class="text-sm text-body"><strong class="text-ink">More than 5 years</strong>, the first 5 years accrue at 21 days/year; every additional year accrues at 30 days/year.</span>
+          </li>
+        </ul>
+        <p class="text-base text-body leading-relaxed">
+          Partial years are <strong class="text-ink">pro-rated</strong> after the first full year. For instance, 3 years and 6 months is treated as exactly 3.5 years.
+        </p>
+      </div>
+
+      <!-- 4. Formula -->
+      <div id="formula" class="mb-12 scroll-mt-20">
+        <h2 class="text-[24px] font-semibold tracking-[-0.96px] text-ink mb-4">4. Step 3, Apply the gratuity formula</h2>
+        <div class="rounded-[8px] bg-ink p-5 mb-6 font-mono text-sm text-on-primary space-y-2">
+          <p class="text-mute text-[11px] uppercase tracking-widest mb-3">Full formula (new law / limited contract)</p>
+          <p>Daily wage = Monthly basic salary ÷ 30</p>
+          <p class="mt-2">If service ≤ 5 years:</p>
+          <p class="pl-4">Gratuity = Daily wage × 21 × service_years</p>
+          <p class="mt-2">If service &gt; 5 years:</p>
+          <p class="pl-4">Gratuity = Daily wage × (21 × 5) + Daily wage × (30 × (service_years − 5))</p>
+          <p class="mt-2">Cap: Gratuity cannot exceed Daily wage × 30 × 24</p>
+        </div>
+        <p class="text-base text-body leading-relaxed">
+          The formula can also be expressed using months for precision. Our calculator converts your join and last-working dates to calendar months, which gives exact results that match manual MOHRE calculations.
+        </p>
+      </div>
+
+      <!-- 5. New vs old law -->
+      <div id="new-vs-old" class="mb-12 scroll-mt-20">
+        <h2 class="text-[24px] font-semibold tracking-[-0.96px] text-ink mb-4">5. New law vs. legacy unlimited contract</h2>
+        <p class="text-base text-body leading-relaxed mb-6">
+          The 2022 reform changed how resignation is treated. Under the new law, limited contracts are the standard, and the reason for leaving is irrelevant to the gratuity amount. Legacy unlimited contracts are no longer issued, but existing ones may still apply their old rules.
+        </p>
+
+        <div class="overflow-x-auto mb-4">
+          <table class="w-full text-sm border border-hairline rounded-[8px] overflow-hidden">
+            <thead class="bg-canvas-soft">
+              <tr class="divide-x divide-hairline">
+                <th class="px-4 py-3 text-left font-medium text-ink">Scenario</th>
+                <th class="px-4 py-3 text-left font-medium text-ink">Limited (New Law)</th>
+                <th class="px-4 py-3 text-left font-medium text-ink">Unlimited (Legacy), Termination</th>
+                <th class="px-4 py-3 text-left font-medium text-ink">Unlimited (Legacy), Resignation</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline bg-canvas">
+              <tr class="divide-x divide-hairline">
+                <td class="px-4 py-3 text-body">&lt; 1 year</td>
+                <td class="px-4 py-3 font-mono text-sm">No gratuity</td>
+                <td class="px-4 py-3 font-mono text-sm">No gratuity</td>
+                <td class="px-4 py-3 font-mono text-sm">No gratuity</td>
+              </tr>
+              <tr class="divide-x divide-hairline">
+                <td class="px-4 py-3 text-body">1–3 years</td>
+                <td class="px-4 py-3 font-mono text-sm">21 days/yr</td>
+                <td class="px-4 py-3 font-mono text-sm">21 days/yr</td>
+                <td class="px-4 py-3 font-mono text-sm">⅓ × (21 days/yr)</td>
+              </tr>
+              <tr class="divide-x divide-hairline">
+                <td class="px-4 py-3 text-body">3–5 years</td>
+                <td class="px-4 py-3 font-mono text-sm">21 days/yr</td>
+                <td class="px-4 py-3 font-mono text-sm">21 days/yr</td>
+                <td class="px-4 py-3 font-mono text-sm">⅔ × (21 days/yr)</td>
+              </tr>
+              <tr class="divide-x divide-hairline">
+                <td class="px-4 py-3 text-body">5+ years</td>
+                <td class="px-4 py-3 font-mono text-sm">30 days/yr (excess)</td>
+                <td class="px-4 py-3 font-mono text-sm">30 days/yr (excess)</td>
+                <td class="px-4 py-3 font-mono text-sm">Full amount</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm text-mute">
+          "Excess" refers to the years beyond 5. All scenarios use 21 days/year for the first 5 years and 30 days/year for any years above 5, before the sliding scale (if any) is applied.
+        </p>
+      </div>
+
+      <!-- 6. Cap -->
+      <div id="cap" class="mb-12 scroll-mt-20">
+        <h2 class="text-[24px] font-semibold tracking-[-0.96px] text-ink mb-4">6. The 2-year cap</h2>
+        <p class="text-base text-body leading-relaxed mb-4">
+          Regardless of the calculation, total gratuity is capped at <strong class="text-ink">two years of basic salary</strong>:
+        </p>
+        <div class="rounded-[8px] bg-ink p-5 mb-4 font-mono text-sm text-on-primary overflow-x-auto">
+          <p>Maximum gratuity = Monthly basic salary × 24</p>
+        </div>
+        <p class="text-base text-body leading-relaxed mb-4">
+          In practice, the cap only kicks in for employees with very long service periods, approximately <strong class="text-ink">25 years or more</strong>. For most employees it never applies.
+        </p>
+        <p class="text-base text-body leading-relaxed">
+          Our calculator automatically checks whether the cap applies and displays a warning if your calculated amount exceeds it.
+        </p>
+      </div>
+
+      <!-- 7. Worked examples -->
+      <div id="examples" class="mb-12 scroll-mt-20">
+        <h2 class="text-[24px] font-semibold tracking-[-0.96px] text-ink mb-4">7. Worked examples</h2>
+
+        <!-- Example 1 -->
+        <div class="mb-8 rounded-[8px] border border-hairline bg-canvas overflow-hidden">
+          <div class="bg-canvas-soft px-5 py-4 border-b border-hairline">
+            <p class="text-sm font-medium text-ink">Example 1, 6 years, termination, new law</p>
+            <p class="text-[12px] text-mute mt-0.5">Monthly basic salary: AED 8,000 · Service: 6 years · Contract: limited · Reason: termination</p>
+          </div>
+          <div class="px-5 py-4 space-y-2 text-sm font-mono overflow-x-auto">
+            <p class="text-body">Daily wage = 8,000 ÷ 30 = <span class="text-ink">AED 266.67</span></p>
+            <p class="text-body">First 5 years: 266.67 × 21 × 5 = <span class="text-ink">AED 28,000.00</span></p>
+            <p class="text-body">Year 6 (30 days): 266.67 × 30 × 1 = <span class="text-ink">AED 8,000.00</span></p>
+            <div class="pt-2 border-t border-hairline mt-2">
+              <p class="font-semibold text-ink">Total gratuity = AED 36,000.00</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="mb-8 rounded-[8px] border border-hairline bg-canvas overflow-hidden">
+          <div class="bg-canvas-soft px-5 py-4 border-b border-hairline">
+            <p class="text-sm font-medium text-ink">Example 2, 7 years 4 months, new law</p>
+            <p class="text-[12px] text-mute mt-0.5">Monthly basic salary: AED 15,000 · Service: 7 years 4 months · Contract: limited</p>
+          </div>
+          <div class="px-5 py-4 space-y-2 text-sm font-mono overflow-x-auto">
+            <p class="text-body">Daily wage = 15,000 ÷ 30 = <span class="text-ink">AED 500.00</span></p>
+            <p class="text-body">First 5 years: 500 × 21 × 5 = <span class="text-ink">AED 52,500.00</span></p>
+            <p class="text-body">2 yrs 4 months (30 days/yr): 500 × 30 × 2.333 = <span class="text-ink">AED 35,000.00</span></p>
+            <div class="pt-2 border-t border-hairline mt-2">
+              <p class="font-semibold text-ink">Total gratuity = AED 87,500.00</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="mb-8 rounded-[8px] border border-hairline bg-canvas overflow-hidden">
+          <div class="bg-canvas-soft px-5 py-4 border-b border-hairline">
+            <p class="text-sm font-medium text-ink">Example 3, Unlimited contract resignation (1–3 years)</p>
+            <p class="text-[12px] text-mute mt-0.5">Monthly basic salary: AED 6,000 · Service: 2 years · Contract: unlimited · Reason: resignation</p>
+          </div>
+          <div class="px-5 py-4 space-y-2 text-sm font-mono overflow-x-auto">
+            <p class="text-body">Daily wage = 6,000 ÷ 30 = <span class="text-ink">AED 200.00</span></p>
+            <p class="text-body">Full 21-day amount: 200 × 21 × 2 = <span class="text-ink">AED 8,400.00</span></p>
+            <p class="text-body">Sliding scale (1–3 yrs resignation): × ⅓ = <span class="text-ink">AED 2,800.00</span></p>
+            <div class="pt-2 border-t border-hairline mt-2">
+              <p class="font-semibold text-ink">Total gratuity = AED 2,800.00</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-sm text-mute">
+          <a href="/" class="text-link hover:underline">Try these scenarios in the live calculator →</a>
+        </p>
+      </div>
+
+      <!-- 8. Article 51 -->
+      <div id="article-51" class="mb-12 scroll-mt-20">
+        <h2 class="text-[24px] font-semibold tracking-[-0.96px] text-ink mb-4">8. Article 51, reference</h2>
+        <p class="text-base text-body leading-relaxed mb-4">
+          The complete legal basis for gratuity calculations in the UAE private sector is Article 51 of Federal Decree-Law No. 33 of 2021 on the Regulation of Labour Relations. Key provisions:
+        </p>
+        <div class="rounded-[8px] border border-hairline bg-canvas-soft p-5 text-sm text-body leading-relaxed space-y-3">
+          <p><strong class="text-ink">Article 51(1):</strong> A worker who completes one year or more in continuous service shall be entitled to an end-of-service gratuity upon the end of their service, calculated on the basis of the basic wage only, for a period of twenty-one days for each year of the first five years of service, and thirty days for each subsequent year.</p>
+          <p><strong class="text-ink">Article 51(2):</strong> The worker shall be entitled to a gratuity for the fractions of the year in proportion to the period of service completed, provided that the worker has completed one year of service.</p>
+          <p><strong class="text-ink">Article 51(3):</strong> The total end-of-service gratuity shall not exceed the wage of two years.</p>
+          <p><strong class="text-ink">Note on unpaid leave:</strong> Days on unpaid leave are excluded from the service period for gratuity calculation purposes under the law's provisions on leave.</p>
+        </div>
+        <p class="text-sm text-mute mt-3">
+          Source: UAE Federal Decree-Law No. 33 of 2021 on the Regulation of Labour Relations (effective 2 February 2022).
+        </p>
+      </div>
+
+      <!-- 9. Disclaimer -->
+      <div id="disclaimer" class="scroll-mt-20">
+        <div class="rounded-[8px] border border-hairline bg-canvas p-6">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-mute shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <div>
+              <p class="text-sm font-medium text-ink mb-2">Disclaimer</p>
+              <p class="text-sm text-body leading-relaxed">
+                This guide and the accompanying calculator provide estimates for informational purposes only. They are based on our interpretation of <strong>UAE Federal Decree-Law No. 33 of 2021, Article 51</strong>. Actual gratuity entitlements may differ based on specific contract terms, court interpretations, company policies, or other legal provisions. This content does not constitute legal advice. For binding determinations, please consult a UAE-qualified employment lawyer or contact MOHRE (Ministry of Human Resources and Emiratisation) directly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA to calculator -->
+  <section class="bg-ink py-10 sm:py-16">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-[28px] font-semibold tracking-[-1.28px] text-on-primary mb-4">Ready to calculate your gratuity?</h2>
+      <p class="text-body leading-relaxed mb-8 max-w-xl mx-auto" style="color:#888888">Use our free calculator to get a full breakdown in seconds, no sign-up required.</p>
+      <a
+        href="/#calculator"
+        class="inline-flex items-center justify-center h-12 px-8 bg-on-primary text-ink text-[16px] font-medium rounded-full hover:opacity-90 transition-opacity"
+      >
+        Go to calculator
+      </a>
+    </div>
+  </section>
+</Layout>

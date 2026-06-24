@@ -1,11 +1,673 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = 'UAE Gratuity Calculator 2024: Free, Transparent, Article 51';
+const description =
+  'Calculate your UAE end-of-service gratuity with a full breakdown. Based on Federal Decree-Law No. 33 of 2021, Article 51. Supports new limited contracts and legacy unlimited contracts.';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={title} description={description} canonical="https://uaegratuitycalculator.com">
+  <!-- ═══ HERO BAND ════════════════════════════════════════════ -->
+  <section class="relative bg-canvas overflow-hidden" id="calculator">
+    <!-- Mesh gradient backdrop -->
+    <div class="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
+      <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <!-- UAE flag green — bottom left glow -->
+          <radialGradient id="rg1" cx="10%" cy="75%" r="55%">
+            <stop offset="0%" stop-color="#009A44" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#009A44" stop-opacity="0"/>
+          </radialGradient>
+          <!-- UAE flag red — top right glow -->
+          <radialGradient id="rg2" cx="85%" cy="15%" r="50%">
+            <stop offset="0%" stop-color="#EF3340" stop-opacity="0.13"/>
+            <stop offset="100%" stop-color="#EF3340" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Warm sand/gold — centre warmth -->
+          <radialGradient id="rg3" cx="50%" cy="50%" r="45%">
+            <stop offset="0%" stop-color="#c8973a" stop-opacity="0.08"/>
+            <stop offset="100%" stop-color="#c8973a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#rg1)"/>
+        <rect width="100%" height="100%" fill="url(#rg2)"/>
+        <rect width="100%" height="100%" fill="url(#rg3)"/>
+      </svg>
+    </div>
+
+    <div class="relative max-w-5xl mx-auto px-6 pt-10 pb-10 sm:pt-20 sm:pb-20">
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-canvas border border-hairline text-[12px] font-mono text-mute mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan inline-block" aria-hidden="true"></span>
+        FEDERAL DECREE-LAW NO. 33 OF 2021 · ARTICLE 51
+      </div>
+
+      <!-- Headline -->
+      <div class="max-w-3xl mb-5">
+        <h1
+          class="text-[30px] sm:text-[40px] md:text-[48px] font-semibold leading-[1.1] tracking-[-1.5px] sm:tracking-[-2.4px] text-ink mb-1"
+          style="text-wrap: balance;"
+        >
+          UAE Gratuity Calculator
+        </h1>
+        <p
+          class="text-[17px] sm:text-[20px] font-medium text-[#009A44] leading-[1.4] text-right"
+          dir="rtl"
+          lang="ar"
+          style="font-family: 'Segoe UI', Tahoma, Arial, sans-serif;"
+        >
+          حاسبة مكافأة نهاية الخدمة في الإمارات
+        </p>
+      </div>
+
+      <!-- Lead -->
+      <p class="text-[16px] sm:text-[18px] text-body leading-[1.6] mb-8 sm:mb-10 max-w-2xl">
+        Free, transparent calculation showing every step: daily wage, year-by-year tiers, and whether the 2-year cap applies. Updated for the 2022 labour law.
+      </p>
+
+      <!-- ── Calculator card ─────────────────────────────────── -->
+      <div
+        class="bg-canvas rounded-xl border border-hairline p-6 sm:p-8"
+        style="box-shadow: 0px 2px 2px #0000000a, 0px 8px 16px -4px #0000000a;"
+      >
+        <form id="gratuity-form" novalidate>
+          <!-- Row 1: Salary + Contract Type -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <!-- Monthly basic salary -->
+            <div>
+              <label for="monthlySalary" class="block text-sm font-medium text-ink mb-1.5">
+                Monthly basic salary <span class="text-mute font-normal">(AED)</span>
+              </label>
+              <div class="relative">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-mute text-sm font-mono pointer-events-none select-none">AED</span>
+                <input
+                  type="number"
+                  id="monthlySalary"
+                  name="monthlySalary"
+                  min="1"
+                  step="any"
+                  required
+                  placeholder="e.g. 8000"
+                  autocomplete="off"
+                  class="w-full h-10 pl-12 pr-4 bg-canvas border border-hairline rounded-[6px] text-sm text-ink placeholder-mute focus:outline-none focus:border-hairline-strong transition-colors"
+                  aria-describedby="salary-hint"
+                />
+              </div>
+              <p id="salary-hint" class="text-[12px] text-mute mt-1">Basic salary only, not including allowances</p>
+            </div>
+
+            <!-- Contract type -->
+            <div>
+              <span class="block text-sm font-medium text-ink mb-1.5">Contract type</span>
+              <div class="space-y-2 pt-0.5">
+                <label class="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="radio"
+                    name="contractType"
+                    value="limited"
+                    checked
+                    class="mt-0.5 w-4 h-4 accent-ink cursor-pointer"
+                    aria-describedby="limited-note"
+                  />
+                  <span class="text-sm text-ink leading-tight">
+                    Limited contract
+                    <span class="block text-[12px] text-mute">New law (post-2022). Both resignation and termination receive the same amount.</span>
+                  </span>
+                </label>
+                <label class="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="radio"
+                    name="contractType"
+                    value="unlimited"
+                    class="mt-0.5 w-4 h-4 accent-ink cursor-pointer"
+                  />
+                  <span class="text-sm text-ink leading-tight">
+                    Unlimited contract
+                    <span class="block text-[12px] text-mute">Legacy type, phased out. Resignation uses a sliding scale.</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Dates -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label for="joinDate" class="block text-sm font-medium text-ink mb-1.5">Date of joining</label>
+              <input
+                type="date"
+                id="joinDate"
+                name="joinDate"
+                required
+                autocomplete="off"
+                class="w-full h-10 px-3 bg-canvas border border-hairline rounded-[6px] text-sm text-ink focus:outline-none focus:border-hairline-strong transition-colors"
+              />
+            </div>
+            <div>
+              <label for="lastWorkingDate" class="block text-sm font-medium text-ink mb-1.5">Last working date</label>
+              <input
+                type="date"
+                id="lastWorkingDate"
+                name="lastWorkingDate"
+                required
+                autocomplete="off"
+                class="w-full h-10 px-3 bg-canvas border border-hairline rounded-[6px] text-sm text-ink focus:outline-none focus:border-hairline-strong transition-colors"
+              />
+            </div>
+          </div>
+
+          <!-- Row 3: Reason + Unpaid leave -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <!-- Reason for leaving -->
+            <div id="reason-group">
+              <span class="block text-sm font-medium text-ink mb-1.5">Reason for leaving</span>
+              <div class="space-y-2 pt-0.5">
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input type="radio" name="reason" value="termination" checked class="w-4 h-4 accent-ink cursor-pointer" />
+                  <span class="text-sm text-ink">Termination</span>
+                </label>
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input type="radio" name="reason" value="resignation" class="w-4 h-4 accent-ink cursor-pointer" />
+                  <span class="text-sm text-ink">Resignation</span>
+                </label>
+              </div>
+              <p id="limited-note" class="text-[12px] text-mute mt-2">
+                Under the new limited contract law, resignation and termination receive the same amount.
+              </p>
+            </div>
+
+            <!-- Unpaid leave -->
+            <div>
+              <label for="unpaidLeaveDays" class="block text-sm font-medium text-ink mb-1.5">
+                Unpaid leave days <span class="text-mute font-normal">(optional)</span>
+              </label>
+              <input
+                type="number"
+                id="unpaidLeaveDays"
+                name="unpaidLeaveDays"
+                min="0"
+                value="0"
+                autocomplete="off"
+                class="w-full h-10 px-3 bg-canvas border border-hairline rounded-[6px] text-sm text-ink focus:outline-none focus:border-hairline-strong transition-colors"
+                aria-describedby="unpaid-hint"
+              />
+              <p id="unpaid-hint" class="text-[12px] text-mute mt-1">Excluded from service period per Article 51</p>
+            </div>
+          </div>
+
+          <!-- Error message -->
+          <div
+            id="form-error"
+            class="hidden mb-5 px-4 py-3 rounded-[6px] bg-error-soft text-error-deep text-sm"
+            role="alert"
+            aria-live="polite"
+          ></div>
+
+          <!-- CTA -->
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center h-12 px-8 bg-ink text-on-primary text-[16px] font-medium rounded-full hover:opacity-90 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            style="touch-action: manipulation;"
+          >
+            Calculate gratuity
+          </button>
+        </form>
+
+        <!-- ── Results ──────────────────────────────────────── -->
+        <div id="results" class="hidden" aria-live="polite">
+          <div class="mt-8 pt-8 border-t border-hairline">
+            <!-- Ineligible -->
+            <div id="result-ineligible" class="hidden">
+              <div class="flex items-start gap-4 p-5 rounded-[8px] bg-warning-soft border border-warning/20">
+                <svg class="w-5 h-5 text-warning-deep mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 3h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                </svg>
+                <div>
+                  <p class="text-sm font-medium text-warning-deep">Not eligible for gratuity</p>
+                  <p class="text-sm text-warning-deep/80 mt-1">Employees must complete at least <strong>1 year (12 months)</strong> of continuous service to be eligible for end-of-service gratuity under Article 51.</p>
+                  <p id="ineligible-detail" class="text-sm text-warning-deep/80 mt-1"></p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Eligible -->
+            <div id="result-eligible" class="hidden">
+              <!-- Service period -->
+              <div class="mb-7">
+                <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-2">Service period</p>
+                <p id="service-period" class="text-[22px] font-semibold text-ink tracking-tight"></p>
+              </div>
+
+              <!-- Breakdown table -->
+              <div class="mb-7">
+                <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-3">Calculation breakdown</p>
+                <div class="rounded-[8px] border border-hairline overflow-hidden">
+                  <table class="w-full text-sm" aria-label="Gratuity calculation breakdown">
+                    <thead>
+                      <tr class="bg-canvas-soft">
+                        <th class="px-4 py-2.5 text-left text-[11px] font-mono text-mute uppercase tracking-wider">Component</th>
+                        <th class="px-4 py-2.5 text-left text-[11px] font-mono text-mute uppercase tracking-wider hidden sm:table-cell">Formula</th>
+                        <th class="px-4 py-2.5 text-right text-[11px] font-mono text-mute uppercase tracking-wider">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody id="breakdown-body" class="divide-y divide-hairline bg-canvas">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Cap warning -->
+              <div id="cap-warning" class="hidden mb-7 flex items-start gap-3 p-4 rounded-[8px] bg-warning-soft border border-warning/20">
+                <svg class="w-4 h-4 text-warning-deep mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 3h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                </svg>
+                <div>
+                  <p class="text-sm font-medium text-warning-deep">2-year cap applied</p>
+                  <p id="cap-warning-text" class="text-sm text-warning-deep/80 mt-0.5"></p>
+                </div>
+              </div>
+
+              <!-- Total gratuity card -->
+              <div
+                class="rounded-[12px] bg-ink px-6 py-7"
+                style="box-shadow: 0px 2px 2px #0000000a, 0px 8px 16px -4px #0000000a;"
+              >
+                <p class="text-[11px] font-mono uppercase tracking-widest mb-3" style="color:#888888">Estimated end-of-service gratuity</p>
+                <p id="total-amount" class="text-[44px] sm:text-[52px] font-semibold leading-none tracking-[-2.4px] text-on-primary tabular"></p>
+                <p class="text-sm mt-5 leading-relaxed" style="color:#888888">
+                  Estimate per <strong class="text-white font-medium">Article 51</strong>, UAE Federal Decree-Law No.&nbsp;33 of 2021.
+                  This is not legal advice. Consult a qualified lawyer or MOHRE for binding determinations.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end calculator card -->
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS BAND ════════════════════════════════════ -->
+  <section class="bg-canvas-soft py-12 sm:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-4">THE FORMULA</p>
+      <h2 class="text-[32px] font-semibold leading-[1.25] tracking-[-1.28px] text-ink mb-4 max-w-2xl">
+        How your gratuity is calculated.
+      </h2>
+      <p class="text-[18px] text-body leading-[1.6] mb-12 max-w-2xl">
+        UAE law sets two day-rate tiers based on how long you've served, then applies contract-type rules for how much you receive.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- Card 1: New Law -->
+        <div
+          class="bg-canvas rounded-[8px] p-6 border border-hairline"
+          style="box-shadow: 0px 1px 1px #00000005, 0px 2px 2px #0000000a;"
+        >
+          <div class="w-8 h-8 rounded-[6px] bg-canvas-soft border border-hairline flex items-center justify-center mb-4" aria-hidden="true">
+            <svg class="w-4 h-4 text-ink" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-[16px] font-semibold text-ink mb-2">Limited contract (new law)</h3>
+          <p class="text-sm text-body leading-relaxed">
+            Both resignation and termination receive the full amount after 1 year. There is no penalty for leaving early.
+          </p>
+          <ul class="mt-4 space-y-1.5">
+            <li class="text-[13px] font-mono text-body">Years 1–5 → 21 days/year</li>
+            <li class="text-[13px] font-mono text-body">Years 6+ → 30 days/year</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Legacy Unlimited -->
+        <div
+          class="bg-canvas rounded-[8px] p-6 border border-hairline"
+          style="box-shadow: 0px 1px 1px #00000005, 0px 2px 2px #0000000a;"
+        >
+          <div class="w-8 h-8 rounded-[6px] bg-canvas-soft border border-hairline flex items-center justify-center mb-4" aria-hidden="true">
+            <svg class="w-4 h-4 text-ink" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-[16px] font-semibold text-ink mb-2">Unlimited contract <span class="text-mute font-normal text-sm">(legacy)</span></h3>
+          <p class="text-sm text-body leading-relaxed">
+            Phased-out contract type. If you <em>resign</em>, a sliding scale applies. Termination gets the full amount.
+          </p>
+          <ul class="mt-4 space-y-1.5">
+            <li class="text-[13px] font-mono text-body">Resigned 1–3 yrs → ⅓ of full</li>
+            <li class="text-[13px] font-mono text-body">Resigned 3–5 yrs → ⅔ of full</li>
+            <li class="text-[13px] font-mono text-body">Resigned 5+ yrs → full amount</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: 2-year cap -->
+        <div
+          class="bg-canvas rounded-[8px] p-6 border border-hairline"
+          style="box-shadow: 0px 1px 1px #00000005, 0px 2px 2px #0000000a;"
+        >
+          <div class="w-8 h-8 rounded-[6px] bg-canvas-soft border border-hairline flex items-center justify-center mb-4" aria-hidden="true">
+            <svg class="w-4 h-4 text-ink" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-[16px] font-semibold text-ink mb-2">The 2-year cap</h3>
+          <p class="text-sm text-body leading-relaxed">
+            Total gratuity cannot exceed 24 months of basic salary, no matter how long you have served.
+          </p>
+          <ul class="mt-4 space-y-1.5">
+            <li class="text-[13px] font-mono text-body">Cap = 24 × monthly salary</li>
+            <li class="text-[13px] font-mono text-body">Applies after ~25 years service</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="mt-8 text-sm text-mute">
+        <a href="/how-it-works" class="text-link hover:underline">Read the full formula guide →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ DARK COMPARISON BAND ═════════════════════════════════ -->
+  <section class="bg-ink py-12 sm:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-[11px] font-mono uppercase tracking-widest mb-4" style="color:#555555">NEW LAW VS OLD LAW</p>
+      <h2 class="text-[32px] font-semibold leading-[1.25] tracking-[-1.28px] text-on-primary mb-4 max-w-2xl">
+        Resignation vs. termination at a glance.
+      </h2>
+      <p class="text-[18px] leading-[1.6] mb-12 max-w-2xl" style="color:#888888">
+        Under the new 2022 law, your reason for leaving no longer affects the gratuity amount for limited contracts.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- New Law Card -->
+        <div class="rounded-[8px] p-4 sm:p-6 border" style="border-color:#2a2a2a;background:#1a1a1a;">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono mb-5" style="background:#0a2a0a;color:#50e3c2;border:1px solid #1a4a1a;">
+            NEW LAW: LIMITED CONTRACT
+          </div>
+          <div class="overflow-x-auto -mx-1">
+            <table class="w-full text-sm min-w-[200px]">
+              <thead>
+                <tr style="color:#555555;">
+                  <th class="text-left py-2 font-mono text-[11px] uppercase tracking-wider">Scenario</th>
+                  <th class="text-right py-2 font-mono text-[11px] uppercase tracking-wider">Yrs 1–5</th>
+                  <th class="text-right py-2 font-mono text-[11px] uppercase tracking-wider">Yrs 6+</th>
+                </tr>
+              </thead>
+              <tbody class="text-on-primary divide-y" style="border-color:#2a2a2a;">
+                <tr>
+                  <td class="py-3 text-sm">Resignation</td>
+                  <td class="py-3 text-right text-sm font-mono">21 d/yr</td>
+                  <td class="py-3 text-right text-sm font-mono">30 d/yr</td>
+                </tr>
+                <tr>
+                  <td class="py-3 text-sm">Termination</td>
+                  <td class="py-3 text-right text-sm font-mono">21 d/yr</td>
+                  <td class="py-3 text-right text-sm font-mono">30 d/yr</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-[12px] mt-4" style="color:#555555">No penalty for resigning. Both scenarios are identical.</p>
+        </div>
+
+        <!-- Legacy Card -->
+        <div class="rounded-[8px] p-4 sm:p-6 border" style="border-color:#2a2a2a;background:#1a1a1a;">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono mb-5" style="background:#2a1a0a;color:#f5a623;border:1px solid #4a2a0a;">
+            LEGACY: UNLIMITED CONTRACT
+          </div>
+          <div class="overflow-x-auto -mx-1">
+            <table class="w-full text-sm min-w-[260px]">
+              <thead>
+                <tr style="color:#555555;">
+                  <th class="text-left py-2 font-mono text-[11px] uppercase tracking-wider">Scenario</th>
+                  <th class="text-right py-2 font-mono text-[11px] uppercase tracking-wider">1–3 yr</th>
+                  <th class="text-right py-2 font-mono text-[11px] uppercase tracking-wider">3–5 yr</th>
+                  <th class="text-right py-2 font-mono text-[11px] uppercase tracking-wider">5+ yr</th>
+                </tr>
+              </thead>
+              <tbody class="text-on-primary divide-y" style="border-color:#2a2a2a;">
+                <tr>
+                  <td class="py-3 text-sm">Resignation</td>
+                  <td class="py-3 text-right text-sm font-mono">⅓</td>
+                  <td class="py-3 text-right text-sm font-mono">⅔</td>
+                  <td class="py-3 text-right text-sm font-mono">Full</td>
+                </tr>
+                <tr>
+                  <td class="py-3 text-sm">Termination</td>
+                  <td class="py-3 text-right text-sm font-mono">Full</td>
+                  <td class="py-3 text-right text-sm font-mono">Full</td>
+                  <td class="py-3 text-right text-sm font-mono">Full</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-[12px] mt-4" style="color:#555555">Fraction shown is of the standard 21-days/year amount.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ SECTION ══════════════════════════════════════════ -->
+  <section class="bg-canvas py-12 sm:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-[11px] font-mono text-mute uppercase tracking-widest mb-4">FAQ</p>
+      <h2 class="text-[32px] font-semibold leading-[1.25] tracking-[-1.28px] text-ink mb-4">
+        Common questions.
+      </h2>
+      <p class="text-[18px] text-body leading-[1.6] mb-12 max-w-2xl">
+        Quick answers to the questions most employees have. <a href="/faq" class="text-link hover:underline">See the full FAQ →</a>
+      </p>
+
+      <dl class="divide-y divide-hairline border-t border-hairline">
+        {[
+          {
+            q: 'What counts as "basic salary" for gratuity purposes?',
+            a: 'Only your fixed monthly basic salary is used, not housing allowance, transport allowance, commissions, bonuses, or any other allowances. Article 51 is explicit that gratuity is based on the basic wage only.',
+          },
+          {
+            q: 'Do I get gratuity if I resign?',
+            a: 'On a limited contract (new law, post-2022): yes, resignation and termination receive the same full amount after 1 year. On a legacy unlimited contract: resignation before 3 years earns ⅓, before 5 years earns ⅔, and after 5 years earns the full amount.',
+          },
+          {
+            q: 'How are partial years calculated?',
+            a: 'After completing the first full year, partial years are pro-rated. For example, 3 years and 6 months earns 3.5 × 21 days × daily wage. The first year itself is not prorated; you must complete a full 12 months.',
+          },
+          {
+            q: 'What is the 2-year cap?',
+            a: 'Your total gratuity cannot exceed 24 months (2 years) of basic salary, regardless of how long you have served. This cap typically applies to employees with more than 25 years of service.',
+          },
+          {
+            q: 'Are unpaid leave days excluded?',
+            a: 'Yes. Days on unpaid leave are not counted as part of the service period for gratuity purposes. Enter any unpaid leave days in the calculator to get an accurate estimate.',
+          },
+        ].map(({ q, a }) => (
+          <details class="group py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <summary class="flex items-center justify-between gap-4 text-sm font-medium text-ink cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 rounded">
+              <span>{q}</span>
+              <svg
+                class="w-4 h-4 text-mute shrink-0 transition-transform group-open:rotate-45"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+            </summary>
+            <p class="mt-3 text-sm text-body leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </dl>
+
+      <p class="mt-8">
+        <a
+          href="/faq"
+          class="inline-flex items-center gap-2 text-sm font-medium text-ink hover:opacity-70 transition-opacity"
+        >
+          View all frequently asked questions
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ DISCLAIMER / TRUST BAND ═══════════════════════════════ -->
+  <section class="bg-canvas-soft border-t border-hairline py-8 sm:py-12">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex items-start gap-4">
+        <div class="w-8 h-8 rounded-full bg-canvas border border-hairline flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
+          <svg class="w-4 h-4 text-mute" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-sm font-medium text-ink mb-1">Disclaimer</p>
+          <p class="text-sm text-body leading-relaxed max-w-3xl">
+            This calculator provides estimates only. Calculations are based on <strong>UAE Federal Decree-Law No.&nbsp;33 of 2021 (Labour Law), Article&nbsp;51</strong>. Results may differ from actual entitlements due to date rounding, specific contract terms, or legal interpretations. This tool does not constitute legal advice. For binding determinations, consult a UAE-qualified employment lawyer or the Ministry of Human Resources and Emiratisation (MOHRE).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script>
+  import { calculateGratuity } from '../lib/gratuity';
+
+  const form = document.getElementById('gratuity-form') as HTMLFormElement;
+  const resultsEl = document.getElementById('results')!;
+  const ineligibleEl = document.getElementById('result-ineligible')!;
+  const eligibleEl = document.getElementById('result-eligible')!;
+  const ineligibleDetail = document.getElementById('ineligible-detail')!;
+  const servicePeriodEl = document.getElementById('service-period')!;
+  const breakdownBodyEl = document.getElementById('breakdown-body')!;
+  const capWarnEl = document.getElementById('cap-warning')!;
+  const capWarnTextEl = document.getElementById('cap-warning-text')!;
+  const totalAmountEl = document.getElementById('total-amount')!;
+  const formErrorEl = document.getElementById('form-error')!;
+  const limitedNoteEl = document.getElementById('limited-note')!;
+
+  // Number formatting helpers
+  const n2 = (v: number) =>
+    new Intl.NumberFormat('en-AE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v);
+  const aed = (v: number) => `AED ${n2(v)}`;
+
+  // Toggle limited-contract note based on contract type
+  document.querySelectorAll<HTMLInputElement>('input[name="contractType"]').forEach(inp => {
+    inp.addEventListener('change', () => {
+      limitedNoteEl.classList.toggle('hidden', inp.value !== 'limited');
+    });
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const fd = new FormData(form);
+
+    const salary = parseFloat(fd.get('monthlySalary') as string);
+    const joinStr = fd.get('joinDate') as string;
+    const lastStr = fd.get('lastWorkingDate') as string;
+    const contractType = fd.get('contractType') as 'limited' | 'unlimited';
+    const reason = (fd.get('reason') as 'resignation' | 'termination') ?? 'termination';
+    const unpaidDays = Math.max(0, parseInt(fd.get('unpaidLeaveDays') as string || '0', 10) || 0);
+
+    if (!salary || salary <= 0) return showError('Please enter a valid monthly basic salary greater than zero.');
+    if (!joinStr) return showError('Please enter your date of joining.');
+    if (!lastStr) return showError('Please enter your last working date.');
+
+    const joinDate = new Date(joinStr);
+    const lastDate = new Date(lastStr);
+
+    if (isNaN(joinDate.getTime()) || isNaN(lastDate.getTime())) return showError('Please enter valid dates.');
+    if (lastDate <= joinDate) return showError('Last working date must be after the date of joining.');
+
+    clearError();
+
+    const result = calculateGratuity({ monthlySalary: salary, joinDate, lastWorkingDate: lastDate, contractType, reason, unpaidLeaveDays: unpaidDays });
+
+    renderResults(result, salary);
+  });
+
+  function showError(msg: string) {
+    formErrorEl.textContent = msg;
+    formErrorEl.classList.remove('hidden');
+  }
+  function clearError() {
+    formErrorEl.textContent = '';
+    formErrorEl.classList.add('hidden');
+  }
+
+  function tdRow(label: string, formula: string, amount: string, bold = false) {
+    const cls = bold ? 'font-semibold text-ink' : 'text-body';
+    return `<tr>
+      <td class="px-4 py-3 text-sm ${cls}">${label}</td>
+      <td class="px-4 py-3 text-[12px] font-mono text-mute hidden sm:table-cell">${formula}</td>
+      <td class="px-4 py-3 text-sm text-right font-mono tabular ${bold ? 'font-semibold text-ink' : 'text-body'}">${amount}</td>
+    </tr>`;
+  }
+
+  function renderResults(r: ReturnType<typeof calculateGratuity>, salary: number) {
+    resultsEl.classList.remove('hidden');
+    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    if (!r.eligible) {
+      ineligibleEl.classList.remove('hidden');
+      eligibleEl.classList.add('hidden');
+      const months = r.serviceMonths.toFixed(1);
+      ineligibleDetail.textContent = `Your service period (${r.serviceYearsDisplay}) is less than 12 months.`;
+      return;
+    }
+
+    ineligibleEl.classList.add('hidden');
+    eligibleEl.classList.remove('hidden');
+
+    servicePeriodEl.textContent = r.serviceYearsDisplay;
+
+    // Build table rows
+    const rows: string[] = [];
+
+    rows.push(tdRow('Daily wage', `${aed(salary)} ÷ 30`, aed(r.dailyWage)));
+
+    // Tier 1
+    const t1Label = r.tier1Months >= 60
+      ? `First 5 years × 21 days/year`
+      : `${r.serviceYearsDisplay} × 21 days/year`;
+    rows.push(tdRow(
+      t1Label,
+      `${n2(r.tier1Days)} days × ${aed(r.dailyWage)}`,
+      aed(r.tier1Amount),
+    ));
+
+    // Tier 2 (if any)
+    if (r.tier2Months > 0) {
+      const t2yrs = parseFloat((r.tier2Months / 12).toFixed(4));
+      const t2Label = `${t2yrs} additional year${t2yrs !== 1 ? 's' : ''} × 30 days/year`;
+      rows.push(tdRow(
+        t2Label,
+        `${n2(r.tier2Days)} days × ${aed(r.dailyWage)}`,
+        aed(r.tier2Amount),
+      ));
+    }
+
+    // Subtotal
+    rows.push(tdRow('Subtotal', '', aed(r.baseAmount), true));
+
+    // Scaling for unlimited resignation
+    if (r.scalingLabel && r.multiplier !== 1) {
+      const pct = r.multiplier === 1 / 3 ? '⅓' : '⅔';
+      rows.push(tdRow(r.scalingLabel, `× ${pct}`, aed(r.scaledAmount)));
+      rows.push(tdRow('After scaling', '', aed(r.scaledAmount), true));
+    }
+
+    breakdownBodyEl.innerHTML = rows.join('');
+
+    // Cap warning
+    if (r.capApplied) {
+      capWarnEl.classList.remove('hidden');
+      capWarnTextEl.textContent = `Calculated amount (${aed(r.scaledAmount)}) exceeds the 2-year salary cap. Maximum payable: ${aed(r.capAmount)} (24 months × ${aed(salary)}).`;
+    } else {
+      capWarnEl.classList.add('hidden');
+    }
+
+    totalAmountEl.textContent = aed(r.total);
+  }
+</script>

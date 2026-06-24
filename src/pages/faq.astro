@@ -1,0 +1,165 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'UAE Gratuity FAQ: Frequently Asked Questions About End-of-Service Pay';
+const description =
+  'Answers to the most common UAE gratuity questions: eligibility, salary types, partial years, resignation rules, unlimited vs limited contracts, the 2-year cap, and more.';
+
+const faqs = [
+  {
+    q: 'Who is entitled to UAE end-of-service gratuity?',
+    a: 'All private-sector employees in the UAE who have completed at least one year of continuous service are entitled to end-of-service gratuity. This applies regardless of nationality, job title, or salary level. Government and federal employees are governed by separate regulations.',
+  },
+  {
+    q: 'What salary is used to calculate gratuity?',
+    a: "Only the basic monthly salary is used. The law explicitly excludes housing allowance, transport allowance, food allowance, overtime pay, bonuses, commissions, and any other allowances or incentives. If your offer letter shows 'Total Compensation' versus 'Basic Salary', use only the Basic Salary figure.",
+  },
+  {
+    q: 'Is gratuity paid if I resign from my job?',
+    a: 'Under the new limited contract law (Federal Decree-Law No. 33 of 2021), yes, resignation and termination are treated identically. Both receive the full gratuity after completing at least one year of service. Under the old unlimited contract, if you resigned, a sliding scale applied: ⅓ for 1–3 years, ⅔ for 3–5 years, and the full amount for 5+ years.',
+  },
+  {
+    q: 'What is a limited contract vs. an unlimited contract?',
+    a: "A limited contract has a defined end date (e.g., a 2-year project contract). An unlimited contract has no end date. Since the 2022 labour law reform, unlimited contracts are no longer issued for new employees, all new contracts are limited. Existing unlimited contracts signed before 2 February 2022 may still apply the old rules until they are renewed or updated.",
+  },
+  {
+    q: 'How are partial years calculated?',
+    a: 'After completing the first full year of service, partial years are pro-rated. For example, 2 years and 8 months of service earns gratuity for exactly 2.67 years (2 + 8/12). The first year itself must be completed in full, you earn nothing if you leave before 12 months.',
+  },
+  {
+    q: 'Are unpaid leave days counted in the service period?',
+    a: 'No. Days on unpaid leave (leave without pay) are excluded from the service period for gratuity purposes. For example, if you worked 3 years but took 90 days of unpaid leave, your effective service for gratuity purposes is 3 years minus 90 days. Enter unpaid leave days in our calculator to get an accurate estimate.',
+  },
+  {
+    q: 'What is the 2-year cap on gratuity?',
+    a: 'Article 51(3) states that total gratuity cannot exceed two years of basic salary (24 months). This cap rarely applies, you would need approximately 25 or more years of service for the formula to produce an amount exceeding 24 monthly salaries. Our calculator automatically flags if the cap applies.',
+  },
+  {
+    q: 'How much gratuity do I get after 5 years?',
+    a: "After exactly 5 years: gratuity = 5 × 21 days × daily wage = 105 days of basic salary. For example, with a basic salary of AED 10,000: daily wage = AED 333.33, and gratuity = 105 × 333.33 = AED 35,000. After 5 years, additional years accrue at 30 days/year (up from 21).",
+  },
+  {
+    q: 'Is gratuity calculated differently for long service (10+ years)?',
+    a: 'Yes. Only the first 5 years accrue at 21 days/year. Every year beyond year 5 accrues at 30 days/year. So for 10 years: gratuity = (21×5 + 30×5) × daily wage = (105 + 150) × daily wage = 255 days of basic salary.',
+  },
+  {
+    q: 'Does gratuity apply to free zone employees?',
+    a: "Most UAE free zones follow the same Federal Labour Law (No. 33 of 2021) for gratuity purposes, including major zones like DIFC (Dubai International Financial Centre) and ADGM, which have their own employment regulations. If you work in DIFC or ADGM, check your specific employment contract and zone regulations, as slightly different rules may apply.",
+  },
+  {
+    q: 'Is gratuity taxed in the UAE?',
+    a: 'The UAE does not impose personal income tax, so gratuity payments are not subject to income tax in the UAE. However, if you are a tax resident of another country, you may need to declare it in your home country. Consult a tax advisor if you are unsure.',
+  },
+  {
+    q: 'Can an employer deduct from my gratuity?',
+    a: "Employers can deduct certain amounts from gratuity, for example, outstanding loans, advances you received, or compensation for proven damages. They cannot reduce gratuity below the legally required amount except through court order or MOHRE-mediated settlement. Any unauthorized deduction can be challenged at MOHRE.",
+  },
+  {
+    q: 'What happens to gratuity if the company goes bankrupt?',
+    a: 'Under UAE law, end-of-service gratuity is treated as a preferential debt, it takes priority over other creditor claims in insolvency proceedings. In practice, recovery depends on the company\'s remaining assets. You should file a claim with MOHRE as soon as possible.',
+  },
+  {
+    q: 'Is gratuity the same as a pension or DEWS?',
+    a: "Not exactly. DEWS (Difc Employee Workplace Savings) is a savings plan mandatory in DIFC that replaces the traditional gratuity system, contributions are made monthly throughout employment. The federal gratuity system is a lump-sum paid at end of service. Some employers offer both types of benefits through their own savings schemes.",
+  },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+});
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical="https://uaegratuitycalculator.com/faq"
+>
+  <slot name="head" slot="head">
+    <script type="application/ld+json" set:html={faqSchema} />
+  </slot>
+
+  <!-- Hero -->
+  <section class="bg-canvas border-b border-hairline py-10 sm:py-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <a href="/" class="inline-flex items-center gap-1.5 text-sm text-mute hover:text-ink transition-colors mb-8">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to calculator
+      </a>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-canvas-soft border border-hairline text-[12px] font-mono text-mute mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-violet" aria-hidden="true"></span>
+        FREQUENTLY ASKED QUESTIONS
+      </div>
+
+      <h1 class="text-[28px] sm:text-[36px] md:text-[42px] font-semibold leading-[1.1] tracking-[-1.2px] sm:tracking-[-1.8px] text-ink mb-5">
+        UAE gratuity: your questions answered.
+      </h1>
+      <p class="text-[16px] sm:text-[18px] text-body leading-[1.6]">
+        {faqs.length} questions covering eligibility, salary rules, contract types, partial years, the 2-year cap, and more, all based on Federal Decree-Law No. 33 of 2021.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ list -->
+  <section class="bg-canvas-soft py-10 sm:py-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <dl class="divide-y divide-hairline border-t border-hairline border-b">
+        {faqs.map(({ q, a }, i) => (
+          <details class="group py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <summary class="flex items-start justify-between gap-4 text-sm font-medium text-ink cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 rounded">
+              <span class="flex items-start gap-3">
+                <span class="font-mono text-[11px] text-mute mt-0.5 shrink-0 w-5 text-right">{String(i + 1).padStart(2, '0')}</span>
+                <span>{q}</span>
+              </span>
+              <svg
+                class="w-4 h-4 text-mute shrink-0 mt-0.5 transition-transform group-open:rotate-45"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+            </summary>
+            <p class="mt-3 ml-8 text-sm text-body leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </dl>
+
+      <!-- Still have questions -->
+      <div class="mt-12 p-6 rounded-[8px] bg-canvas border border-hairline text-center">
+        <p class="text-sm font-medium text-ink mb-2">Still have a question?</p>
+        <p class="text-sm text-body mb-4">Our formula guide walks through Article 51 in full, with worked examples.</p>
+        <a
+          href="/how-it-works"
+          class="inline-flex items-center gap-2 text-sm font-medium text-ink hover:opacity-70 transition-opacity"
+        >
+          Read the formula guide
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-ink py-10 sm:py-16">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-[28px] font-semibold tracking-[-1.28px] text-on-primary mb-4">Calculate your gratuity now.</h2>
+      <p class="leading-relaxed mb-8 max-w-xl mx-auto text-sm" style="color:#888888">Free, transparent breakdown. No sign-up. Updated for the 2022 labour law.</p>
+      <a
+        href="/"
+        class="inline-flex items-center justify-center h-12 px-8 bg-on-primary text-ink text-[16px] font-medium rounded-full hover:opacity-90 transition-opacity"
+      >
+        Open calculator
+      </a>
+    </div>
+  </section>
+</Layout>
