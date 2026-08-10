@@ -28,10 +28,33 @@ Reading the decree took longer than writing the code.
 
 Astro, Tailwind CSS, Cloudflare Pages.
 
-```bash
-npm install
-npm run dev
+## Project structure
+
+```text
+/
+├── public/
+├── src/
+│   ├── layouts/
+│   └── pages/
+└── package.json
 ```
+
+[Astro project structure guide](https://docs.astro.build/en/basics/project-structure/)
+
+## Commands
+
+Run from the project root:
+
+| Command | Action |
+| :--- | :--- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the dev server at `localhost:4321` |
+| `npm run build` | Build to `./dist/` |
+| `npm run preview` | Preview the build before deploying |
+| `npm run astro ...` | Run CLI commands such as `astro add`, `astro check` |
+| `npm run astro -- --help` | Astro CLI help |
+
+[Astro docs](https://docs.astro.build) · [Astro Discord](https://astro.build/chat)
 
 ## Accuracy
 
