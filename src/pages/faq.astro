@@ -75,11 +75,7 @@ const faqSchema = JSON.stringify({
 });
 ---
 
-<Layout
-  title={title}
-  description={description}
-  canonical="https://uaegratuitycalculator.com/faq"
->
+<Layout title={title} description={description}>
   <slot name="head" slot="head">
     <script type="application/ld+json" set:html={faqSchema} />
   </slot>

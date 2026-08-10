@@ -12,38 +12,43 @@ interface Props {
 const {
   title,
   description,
-  canonical = 'https://uaegratuitycalculator.com',
-  ogImage = 'https://uaegratuitycalculator.com/web-app-manifest-512x512.png',
+  canonical = new URL(Astro.url.pathname, Astro.site).href,
+  ogImage = new URL('/web-app-manifest-512x512.png', Astro.site).href,
   robots = 'index, follow',
 } = Astro.props;
 
+// Same labels rendered in this file's own <nav>/<footer> below.
+const breadcrumbLabels: Record<string, string> = {
+  '/how-it-works': 'How It Works',
+  '/faq': 'FAQ',
+  '/about': 'About Us',
+  '/contact': 'Contact',
+  '/privacy-policy': 'Privacy Policy',
+  '/terms': 'Terms & Conditions',
+};
+const normalizedPathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const currentLabel = breadcrumbLabels[normalizedPathname];
+
 const siteSchema = JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'UAE Gratuity Calculator',
-  alternateName: ['Gratuity Calculator UAE', 'MOHRE Gratuity Calculator', 'End of Service Calculator UAE'],
-  url: 'https://uaegratuitycalculator.com',
-  description: 'Free UAE end-of-service gratuity calculator based on Federal Decree-Law No. 33 of 2021, Article 51. Covers limited contracts, legacy unlimited contracts, the 21-day and 30-day tiers, and the 2-year cap.',
-  applicationCategory: 'FinanceApplication',
-  applicationSubCategory: 'Calculator',
-  operatingSystem: 'Any',
-  browserRequirements: 'Requires JavaScript',
-  inLanguage: ['en', 'ar', 'hi', 'ur'],
-  keywords: 'uae gratuity calculator, gratuity calculator dubai, end of service calculator uae, mohre gratuity calculator, gratuity calculator abu dhabi, how to calculate gratuity in uae, uae labour law gratuity',
-  featureList: [
-    'Calculates gratuity under UAE Federal Decree-Law No. 33 of 2021, Article 51',
-    'Supports limited contracts (post-2022) and legacy unlimited contracts',
-    'Shows 21-day and 30-day tier breakdown',
-    'Applies the 2-year salary cap automatically',
-    'Handles unpaid leave day deductions',
-    'Resignation vs termination scaling for unlimited contracts',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${Astro.site.href}#organization`,
+      name: 'UAE Gratuity Calculator',
+      url: Astro.site.href,
+      logo: ogImage,
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site.href },
+        ...(currentLabel
+          ? [{ '@type': 'ListItem', position: 2, name: currentLabel, item: canonical }]
+          : []),
+      ],
+    },
   ],
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'AED' },
-  publisher: {
-    '@type': 'Organization',
-    name: 'UAE Gratuity Calculator',
-    url: 'https://uaegratuitycalculator.com',
-  },
 });
 ---
 

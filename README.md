@@ -1,46 +1,39 @@
-# Astro Starter Kit: Basics
+# calculateuaegratuity.com
 
-```sh
-npm create astro@latest -- --template basics
+UAE end-of-service gratuity, worked out to the letter of the law.
+
+Live at [calculateuaegratuity.com](https://calculateuaegratuity.com)
+
+## What it does
+
+Anyone leaving a job in the UAE is owed a gratuity payment. What they get depends on contract
+type, years served, and how the job ended. The rules sit in UAE Federal Decree-Law No. 33 of
+2021, and the arithmetic changes at the five-year mark.
+
+Enter salary, start date, end date and reason for leaving. You get the figure back with the
+calculation shown, so you can check it instead of trusting it.
+
+## Build notes
+
+First site in the portfolio. One calculator on one page, plus the pages a real site needs to
+be taken seriously: how it works, FAQ, about, contact, privacy, terms.
+
+The lesson was commercial. I chose the keyword on search volume alone. The site ranks. It
+earns nothing, because nobody searching that term is worth anything to an advertiser. Every
+build after this one had to clear a cost-per-click floor before I bought the domain.
+
+Reading the decree took longer than writing the code.
+
+## Stack
+
+Astro, Tailwind CSS, Cloudflare Pages.
+
+```bash
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Accuracy
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Rules read from the Federal Decree-Law and its amendments. Output is an estimate for
+planning. Unusual contracts and disputed terminations need a lawyer, not a calculator.

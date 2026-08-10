@@ -24,3 +24,14 @@ pnpm-debug.log*
 .idea/
 .gstack/
 .superpowers/
+
+# private — build method and working docs, kept out of the public repo
+.claude/
+.agents/
+skills-lock.json
+AGENTS.md
+CLAUDE.md
+DESIGN.md
+docs/
+gates/
+*.zip

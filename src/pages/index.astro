@@ -4,9 +4,55 @@ import Layout from '../layouts/Layout.astro';
 const title = 'UAE Gratuity Calculator – Free End of Service Calculator (MOHRE Formula)';
 const description =
   'Free UAE gratuity calculator using the official MOHRE formula. Instantly calculate end of service benefits UAE — Dubai, Abu Dhabi, all emirates. Covers limited & unlimited contracts, 21/30-day tiers, and the 2-year cap. Based on Federal Decree-Law No. 33 of 2021, Article 51.';
+
+const faqs = [
+  {
+    q: 'What counts as "basic salary" for gratuity purposes?',
+    a: 'Only your fixed monthly basic salary is used, not housing allowance, transport allowance, commissions, bonuses, or any other allowances. Article 51 is explicit that gratuity is based on the basic wage only.',
+  },
+  {
+    q: 'Do I get gratuity if I resign?',
+    a: 'On a limited contract (new law, post-2022): yes, resignation and termination receive the same full amount after 1 year. On a legacy unlimited contract: resignation before 3 years earns ⅓, before 5 years earns ⅔, and after 5 years earns the full amount.',
+  },
+  {
+    q: 'How are partial years calculated?',
+    a: 'After completing the first full year, partial years are pro-rated. For example, 3 years and 6 months earns 3.5 × 21 days × daily wage. The first year itself is not prorated; you must complete a full 12 months.',
+  },
+  {
+    q: 'What is the 2-year cap?',
+    a: 'Your total gratuity cannot exceed 24 months (2 years) of basic salary, regardless of how long you have served. This cap typically applies to employees with more than 25 years of service.',
+  },
+  {
+    q: 'Are unpaid leave days excluded?',
+    a: 'Yes. Days on unpaid leave are not counted as part of the service period for gratuity purposes. Enter any unpaid leave days in the calculator to get an accurate estimate.',
+  },
+];
+
+const articleSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'UAE End-of-Service Gratuity: What You Are Owed',
+  description,
+  inLanguage: 'en',
+  publisher: { '@id': `${Astro.site.href}#organization` },
+});
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+});
 ---
 
-<Layout title={title} description={description} canonical="https://uaegratuitycalculator.com">
+<Layout title={title} description={description}>
+  <slot name="head" slot="head">
+    <script type="application/ld+json" set:html={articleSchema} />
+    <script type="application/ld+json" set:html={faqSchema} />
+  </slot>
   <!-- ═══ HERO BAND ════════════════════════════════════════════ -->
   <section class="relative bg-canvas overflow-hidden" id="calculator">
     <!-- Mesh gradient backdrop -->
@@ -459,28 +505,7 @@ const description =
       </p>
 
       <dl class="divide-y divide-hairline border-t border-hairline">
-        {[
-          {
-            q: 'What counts as "basic salary" for gratuity purposes?',
-            a: 'Only your fixed monthly basic salary is used, not housing allowance, transport allowance, commissions, bonuses, or any other allowances. Article 51 is explicit that gratuity is based on the basic wage only.',
-          },
-          {
-            q: 'Do I get gratuity if I resign?',
-            a: 'On a limited contract (new law, post-2022): yes, resignation and termination receive the same full amount after 1 year. On a legacy unlimited contract: resignation before 3 years earns ⅓, before 5 years earns ⅔, and after 5 years earns the full amount.',
-          },
-          {
-            q: 'How are partial years calculated?',
-            a: 'After completing the first full year, partial years are pro-rated. For example, 3 years and 6 months earns 3.5 × 21 days × daily wage. The first year itself is not prorated; you must complete a full 12 months.',
-          },
-          {
-            q: 'What is the 2-year cap?',
-            a: 'Your total gratuity cannot exceed 24 months (2 years) of basic salary, regardless of how long you have served. This cap typically applies to employees with more than 25 years of service.',
-          },
-          {
-            q: 'Are unpaid leave days excluded?',
-            a: 'Yes. Days on unpaid leave are not counted as part of the service period for gratuity purposes. Enter any unpaid leave days in the calculator to get an accurate estimate.',
-          },
-        ].map(({ q, a }) => (
+        {faqs.map(({ q, a }) => (
           <details class="group py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <summary class="flex items-center justify-between gap-4 text-sm font-medium text-ink cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 rounded">
               <span>{q}</span>

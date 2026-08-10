@@ -14,15 +14,11 @@ const articleSchema = JSON.stringify({
   publisher: { '@type': 'Organization', name: 'UAE Gratuity Calculator' },
   datePublished: '2024-01-01',
   dateModified: '2024-01-01',
-  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://uaegratuitycalculator.com/how-it-works' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': new URL('/how-it-works', Astro.site).href },
 });
 ---
 
-<Layout
-  title={title}
-  description={description}
-  canonical="https://uaegratuitycalculator.com/how-it-works"
->
+<Layout title={title} description={description}>
   <slot name="head" slot="head">
     <script type="application/ld+json" set:html={articleSchema} />
   </slot>
